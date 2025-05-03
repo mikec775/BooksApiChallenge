@@ -1,0 +1,6 @@
+@BookApiChallenge_HostAddress = http://localhost:5146
+
+GET {{BookApiChallenge_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
