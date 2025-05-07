@@ -64,8 +64,8 @@ namespace BookApiChallenge.Controllers
             var booksWithStatus = _books.Select(book => new
             {
 
-                Title = book.BookTitle,
-                Status = book.PublicationStatus
+                BookTitle = book.BookTitle,
+                PublicationStatus = book.PublicationStatus
 
             });
 

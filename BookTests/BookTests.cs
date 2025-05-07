@@ -57,7 +57,7 @@ namespace BookTests
         public async Task PublishBook_ShouldReturnOkAndUpdatedStatus()
         {
 
-            var createResponse = await _client.PostAsJsonAsync("/api/Books", "Published");
+            var createResponse = await _client.PostAsJsonAsync("/api/Books", "Test Book");
             createResponse.EnsureSuccessStatusCode();
 
             var createdBook = await createResponse.Content.ReadFromJsonAsync<Book>();
@@ -73,7 +73,7 @@ namespace BookTests
 
             Assert.NotNull(publishedBook.PublicationDate);
 
-            Assert.Equal("Published", publishedBook.BookTitle);
+            Assert.Equal("Test Book", publishedBook.BookTitle);
 
         }
 
@@ -95,7 +95,7 @@ namespace BookTests
         public async Task PublishBook_ShouldReturnBadRequestForDuplicateBook()
         {
 
-            var createResponse = await _client.PostAsJsonAsync("/api/Books", "Published");
+            var createResponse = await _client.PostAsJsonAsync("/api/Books", "Test Book");
             createResponse.EnsureSuccessStatusCode();
 
             var createdBook = await createResponse.Content.ReadFromJsonAsync<Book>();
@@ -129,23 +129,25 @@ namespace BookTests
         }
 
         //Check if correct data returned from getting books
+        [Fact]
         public async Task GetBooks_ShouldReturnCorrectData()
         {
 
-            await _client.PostAsJsonAsync("/api/Books", "Test Book");
-            await _client.PostAsync("/api/Books/1/publish", null);
+            var response = await _client.PostAsJsonAsync("/api/Books", "Test Book");
 
-            var response = await _client.GetAsync("/api/Books");
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            var myBook = await response.Content.ReadFromJsonAsync<Book>();
 
-            var booksAsList = await response.Content.ReadFromJsonAsync<List<Book>>();
-            Assert.NotNull(booksAsList);
-            Assert.True(booksAsList.Count >= 1);
+            var publishResponse = await _client.PostAsync($"api/Books/{myBook.BookID}/publish", null);
+            var myPublishedBook = await publishResponse.Content.ReadFromJsonAsync<Book>();
 
-            var book = booksAsList[0];
-            Assert.NotNull(book);
-            Assert.Equal("Test Book", book.BookTitle);
-            Assert.Equal("Published", book.PublicationStatus);
+            var getResponse = await _client.GetAsync("/api/Books");
+
+            var bookShelf = await getResponse.Content.ReadFromJsonAsync<List<Book>>();
+
+            var bookData = bookShelf.FirstOrDefault(b => b?.BookTitle == "Test Book");
+
+            Assert.Equal("Test Book", bookData.BookTitle);
+            Assert.Equal("Published", bookData.PublicationStatus);
 
 
         }
