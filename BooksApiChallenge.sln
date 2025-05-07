@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookApiChallenge", "..\..\WebApplicationBooksAppWithTesting\BooksApiChallenge\BookApiChallenge\BookApiChallenge.csproj", "{F83747D7-B989-4F73-85E9-D30A9C3DE70B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookApiChallenge", ".\BookApiChallenge\BookApiChallenge.csproj", "{F83747D7-B989-4F73-85E9-D30A9C3DE70B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookTests", "..\..\WebApplicationBooksAppWithTesting\BooksApiChallenge\BookTests\BookTests.csproj", "{DC9837A3-2E28-4E4E-86C6-35A4845D487F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookTests", ".\BookTests\BookTests.csproj", "{DC9837A3-2E28-4E4E-86C6-35A4845D487F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
